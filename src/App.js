@@ -7,9 +7,9 @@ Submission : March 25th, 2024
 =================================================================================================================
 */
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
-import Products from './components/products';
+import ProductPage from './components/ProductPage'; // Import the ProductPage component
 import Login from './components/Login';
 import './App.css';
 
@@ -18,10 +18,11 @@ function App() {
     <Router>
         <Routes>
           <Route exact path="/" element={<Homepage/>}/>
-          <Route path="/products" element={<Products/>}/>
+          <Route path="/products" element={<ProductPage/>}/> {/* Update this line to use ProductPage */}
           <Route path="/login" element={<Login/>}/>
         </Routes>
     </Router>
   );
 }
+
 export default App;
