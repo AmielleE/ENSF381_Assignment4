@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CartItem = ({ item, onDecreaseQuantity, onRemoveFromCart }) => {
+const CartItem = ({ item, onRemove }) => {
   return (
     <div className="cart-item">
       <img src={item.image} alt={item.name} className="cart-item-image" />
@@ -9,12 +9,7 @@ const CartItem = ({ item, onDecreaseQuantity, onRemoveFromCart }) => {
         <p>Price: ${item.price.toFixed(2)}</p>
         <p>Quantity: {item.quantity}</p>
         <p>Total: ${(item.quantity * item.price).toFixed(2)}</p>
-        {item.quantity > 1 && (
-          <button onClick={() => onDecreaseQuantity(item.id)} className="cart-item-quantity-decrease">
-            -
-          </button>
-        )}
-        <button onClick={() => onRemoveFromCart(item.id)} className="cart-item-remove-button">
+        <button onClick={() => onRemove(item.id)} className="cart-item-remove-button">
           Remove
         </button>
       </div>

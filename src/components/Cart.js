@@ -3,10 +3,11 @@ import CartItem from './CartItem';
 
 const Cart = ({ cartItems, onUpdateCartQty, onRemoveFromCart }) => {
 
-  const handleDecreaseQuantity = (productId) => {
-    const currentQuantity = cartItems.find(item => item.id === productId).quantity;
-    if (currentQuantity > 1) {
-      onUpdateCartQty(productId, currentQuantity - 1);
+  const handleRemoveOneItem = (productId) => {
+    const item = cartItems.find(item => item.id === productId);
+
+    if (item.quantity > 1) {
+      onUpdateCartQty(productId, item.quantity - 1);
     } else {
       onRemoveFromCart(productId);
     }
@@ -27,8 +28,7 @@ const Cart = ({ cartItems, onUpdateCartQty, onRemoveFromCart }) => {
             <CartItem
               key={item.id}
               item={item}
-              onDecreaseQuantity={handleDecreaseQuantity} 
-              onRemoveFromCart={onRemoveFromCart} 
+              onRemove={handleRemoveOneItem} 
             />
           ))}
           <div className="cart-total">
