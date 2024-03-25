@@ -6,10 +6,6 @@ const Cart = ({ cartItems, onUpdateCartQty, onRemoveFromCart }) => {
     onRemoveFromCart(productId);
   };
 
-  const handleUpdateCartQty = (productId, quantity) => {
-    onUpdateCartQty(productId, quantity);
-  };
-
   const calculateTotal = (items) => {
     return items.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2);
   };
@@ -25,8 +21,7 @@ const Cart = ({ cartItems, onUpdateCartQty, onRemoveFromCart }) => {
             <CartItem
               key={item.id}
               item={item}
-              onUpdateCartQty={handleUpdateCartQty}
-              onRemoveFromCart={handleRemoveFromCart}
+              onRemove={handleRemoveFromCart} 
             />
           ))}
           <div className="cart-total">
