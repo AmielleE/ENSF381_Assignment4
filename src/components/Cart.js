@@ -2,8 +2,14 @@ import React from 'react';
 import CartItem from './CartItem';
 
 const Cart = ({ cartItems, onUpdateCartQty, onRemoveFromCart }) => {
-  const handleRemoveFromCart = (productId) => {
-    onRemoveFromCart(productId);
+
+  const handleDecreaseQuantity = (productId) => {
+    const currentQuantity = cartItems.find(item => item.id === productId).quantity;
+    if (currentQuantity > 1) {
+      onUpdateCartQty(productId, currentQuantity - 1);
+    } else {
+      onRemoveFromCart(productId);
+    }
   };
 
   const calculateTotal = (items) => {
@@ -21,7 +27,8 @@ const Cart = ({ cartItems, onUpdateCartQty, onRemoveFromCart }) => {
             <CartItem
               key={item.id}
               item={item}
-              onRemove={handleRemoveFromCart} 
+              onDecreaseQuantity={handleDecreaseQuantity} 
+              onRemoveFromCart={onRemoveFromCart} 
             />
           ))}
           <div className="cart-total">
