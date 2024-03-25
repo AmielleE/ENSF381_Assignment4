@@ -8,14 +8,17 @@
 }
 
 .product-list {
-  width: 10%;
+  width: 60%;
   padding: 1rem;
 }
 
 .cart {
-  width: 10%;
+  width: 30%;
   padding: 1rem;
   margin-left: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .product-item {
@@ -23,23 +26,26 @@
   margin-bottom: 1rem;
 }
 
-.product-name {
+.product-name,
+.product-price {
   font-size: 1rem;
   margin: 0.5rem 0;
   font-weight: normal;
+  display: block; 
 }
 
 .product-image {
-  width: 90%;
+  width: 100%; 
   height: auto;
   margin-bottom: 0.5rem;
 }
 
-.product-details {
+
+.product-description {
   display: none;
 }
 
-.product-item:hover .product-details {
+.product-item:hover .product-description {
   display: block;
 }
 
@@ -59,15 +65,22 @@
 }
 
 .cart-item-image {
-  align-self: center;
+  width: 80px; 
   margin-bottom: 1rem;
+}
+
+.cart-item-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.5rem 0;
 }
 
 .cart-item-name,
 .cart-item-price,
 .cart-item-quantity,
 .cart-item-total {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .cart-item-remove-button {
@@ -76,7 +89,6 @@
   padding: 0.5rem 1rem;
   color: black;
   margin-top: 1rem;
-  width: fit-content;
   cursor: pointer;
 }
 
@@ -86,13 +98,14 @@
 
 .cart-total {
   font-weight: bold;
-  padding-top: 0.5rem;
-  border-top: 1px solid #ddd;
+  margin-top: 1rem;
+  text-align: left;
 }
 
 .cart-heading {
   font-size: 1rem;
   margin-bottom: 1rem;
+  text-align: left;
 }
 
 .App-logo {
