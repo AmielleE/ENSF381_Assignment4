@@ -34,13 +34,13 @@
 }
 
 .product-image {
-  width: 100%; 
+  width: 90%; 
   height: auto;
   margin-bottom: 0.5rem;
 }
 
 .product-description {
-  display: none; 
+  display: none;
 }
 
 .product-item:hover .product-description {
