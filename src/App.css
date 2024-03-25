@@ -37,65 +37,72 @@
   }
 }
 
-.product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px; 
-  padding: 20px;
-}
-
-.product-item {
-  border: 1px solid #ddd;
-  padding: 10px;
-  width: 200px; 
-}
-
-.product-item:hover .product-details {
-  display: block; 
-}
-
-.product-image {
-  max-width: 100%;
-  height: auto;
-}
-
-.product-name {
-  font-size: 1.2em;
-}
-
-.product-details {
-  display: none; 
-}
-
-.product-price {
-  font-weight: bold;
-}
-
-.add-to-cart-button {
-  background-color: #61dafb;
-  color: white;
+.product-item,
+.cart-item {
   border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-top: 10px;
+  box-shadow: none;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-list {
+  width: 70%;
+  padding: 1rem;
 }
 
 .cart {
-  border-top: 2px solid #ddd;
-  padding-top: 20px;
+  width: 30%;
+  padding: 1rem;
+  border-left: 2px solid #ddd; 
+}
+
+.product-item {
+  margin-bottom: 1rem;
+}
+
+.product-image {
+  width: 100%; 
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.product-details {
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.2rem;
+  color: #333; 
+}
+
+.add-to-cart-button,
+.cart-item-remove-button {
+  background-color: #ffffff; 
+  color: #000;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.add-to-cart-button:hover,
+.cart-item-remove-button:hover {
+  opacity: 0.9;
 }
 
 .cart-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .cart-item-image {
   width: 50px; 
-  height: auto;
   margin-right: 10px;
 }
 
@@ -103,28 +110,8 @@
   flex-grow: 1;
 }
 
-.cart-item-name {
-  font-size: 1em;
-}
-
-.cart-item-price {
-  font-size: 1em;
-}
-
-.cart-item-quantity {
-  display: flex;
-  align-items: center;
-}
-
-.cart-item-remove-button {
-  background-color: #ff6b6b;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
 .cart-total {
-  font-size: 1.2em;
   font-weight: bold;
+  margin-top: 1rem;
 }
+
