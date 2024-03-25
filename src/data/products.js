@@ -6,7 +6,6 @@ Author(s) : Amielle El Makhzoumi, Diba Jamali
 Submission : March 25th, 2024
 =================================================================================================================
 */
-
 const product = [
     {
         id: 1,
