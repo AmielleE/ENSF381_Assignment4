@@ -60,7 +60,7 @@
 }
 
 .product-item {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .product-image {
@@ -74,13 +74,13 @@
 }
 
 .product-price {
-  font-size: 1.2rem;
+  font-size: 0.5rem;
   color: #333; 
 }
 
 .add-to-cart-button,
 .cart-item-remove-button {
-  background-color: #ffffff; 
+  background-color: #a8a8a8; 
   color: #000;
   text-transform: uppercase;
   padding: 0.5rem 1rem;
