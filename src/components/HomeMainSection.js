@@ -6,8 +6,8 @@ Author(s) : Amielle El Makhzoumi, Diba Jamali
 Submission : March 25th, 2024
 =================================================================================================================
 */
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import reviews from '../data/reviews';
 
 const HomeMainSection = () => {
@@ -23,20 +23,25 @@ const HomeMainSection = () => {
   }, []);
 
   return (
-    <div>
-      <section className="about-us">
-        <h2>About Us</h2>
+    <div style={{ padding: '10px' }}>
+      <section className="about-us" style={{ marginTop: '25px' }}>
+        <h2><b>About Us</b></h2>
         <p>Welcome to our online store! We are passionate about providing high-quality products and exceptional customer service. Learn more about our story and commitment to your satisfaction.</p>
-        <button><Link to="/products">Shop Now</Link></button> 
+        <button><Link to="/products">Shop Now</Link></button>
       </section>
-      <section className="customer-reviews">
-        <h2>Customer Reviews</h2>
-        <ul>
+      <section className="customer-reviews" style={{ marginTop: '40px' }}>
+        <h2><b>Customer Reviews</b></h2>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
           {randomReviews.map((review, index) => (
-            <li key={index}>
-              <h3>{review.customerName}</h3>
-              <p>{review.reviewContent}</p>
-              <div className="rating">
+            <li key={index} style={{ marginBottom: '20px' }}>
+              <div style={{ marginBottom: '5px', fontWeight: 'normal' }}>
+                {review.customerName}
+              </div>
+              <div style={{ marginBottom: '5px' }}>
+                <p>{review.reviewContent}</p>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <p style={{ margin: '0', marginRight: '10px', fontWeight: 'normal' }}>Rating:</p>
                 {Array.from({ length: review.stars }, (_, i) => (
                   <span key={i}>⭐</span>
                 ))}
@@ -48,4 +53,5 @@ const HomeMainSection = () => {
     </div>
   );
 }
+
 export default HomeMainSection;

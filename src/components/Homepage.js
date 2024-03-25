@@ -14,9 +14,9 @@ import Footer from './Footer';
 const Homepage = () => {
   return (
     <div>
-      <Header/>
-      <HomeMainSection/>
-      <Footer/>
+      <Header />
+      <HomeMainSection />
+      <Footer />
     </div>
   );
 }

@@ -1,51 +1,38 @@
-/* styles.css */
-
-/* Set font size and color for the entire application */
 .App {
-  font-size: 14px;
-  color: black;
+  text-align: center;
 }
 
-/* Ensure that the content stretches to the full width of the container */
-.App > :first-child {
-  width: 100%;
-  align-self: stretch;
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-/* Adjust hover color for navigation links */
-.nav-link {
-  transition: color 0.2s;
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-.nav-link:hover,
-.nav-link:focus {
-  color: #555;
-  text-decoration: none;
-}
-
-/* Align customer reviewers, their reviews, and stars to the left and remove bold styling from reviewer names */
-.customer-review {
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 10px; /* Add margin between customer reviews */
-}
-
-.customer-name {
-  font-weight: normal; /* Remove bold styling from reviewer names */
-  margin-right: 10px; /* Add spacing between reviewer name and review content */
-}
-
-.customer-review-content {
-  margin-bottom: 5px; /* Add margin between review content and stars */
-}
-
-.customer-stars {
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 5px; /* Add margin between stars and next review */
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-.star {
-  color: #ffd700; /* Set star color */
-  margin-right: 3px; /* Add spacing between stars */
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
