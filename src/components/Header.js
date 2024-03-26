@@ -27,7 +27,7 @@ const Styles = {
 
     companyname: {
         flex: '1',
-        fontSize: '7px',
+        fontSize: '9px',
         textAlign: 'right',
     },
 };
@@ -54,7 +54,7 @@ function Header() {
             <StyledNav>
                 <a href='/'>Home</a>
                 <a href='/products'>Products</a>
-                <a href='/Login'>Login</a>
+                <a href='/login'>Login</a>
             </StyledNav>
         </HeaderWrapper>
     );

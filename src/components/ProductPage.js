@@ -1,3 +1,11 @@
+/*
+=================================================================================================================
+Name: ProductPage.js
+Assignment: 4
+Author(s): Amielle El Makhzoumi, Diba Jamali
+Submission: March 25th, 2024
+=================================================================================================================
+*/
 import React, { useState, useEffect } from 'react';
 import Header from './Header'; 
 import ProductList from './ProductList';
