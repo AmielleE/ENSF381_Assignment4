@@ -28,7 +28,7 @@ const Cart = ({ cartItems, onUpdateCartQty, onRemoveFromCart }) => {
   return (
     <div className="cart" style={{ width: '30%', padding: '1rem', marginLeft: 'auto', position: 'absolute', 
           right: '0', top: '6rem' }}>
-      <h2 className="cart-heading" style={{ fontSize: '1.5rem', marginBottom: '1rem', textAlign: 'left' }}>Your Shopping Cart</h2>
+      <h2 className="cart-heading" style={{ fontSize: '25px', marginBottom: '1rem', textAlign: 'left' }}>Shopping Cart</h2>
       {cartItems.length === 0 ? (
         <p className="cart-empty-message">Your cart is empty</p>
       ) : (

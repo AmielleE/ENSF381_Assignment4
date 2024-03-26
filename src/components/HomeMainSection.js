@@ -27,7 +27,9 @@ const HomeMainSection = () => {
       <section className="about-us" style={{ marginTop: '25px' }}>
         <h2><b>About Us</b></h2>
         <p>Welcome to our online store! We are passionate about providing high-quality products and exceptional customer service. Learn more about our story and commitment to your satisfaction.</p>
-        <button><Link to="/products">Shop Now</Link></button>
+        <Link to="/products">
+          <button>Shop Now</button>
+        </Link>
       </section>
       <section className="customer-reviews" style={{ marginTop: '40px' }}>
         <h2><b>Customer Reviews</b></h2>
