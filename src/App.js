@@ -10,7 +10,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import ProductPage from './components/ProductPage';
-import Login from './components/Login';
+import LoginPage from './components/LoginPage';
 import './App.css';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Homepage/>}/>
           <Route path="/products" element={<ProductPage/>}/>
-          <Route path="/login" element={<Login/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
         </Routes>
     </Router>
   );
