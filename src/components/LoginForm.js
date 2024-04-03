@@ -7,7 +7,7 @@ Submission: April 8th, 2024
 =================================================================================================================
 */
 import React, { useState } from 'react';
-import SignupForm from './SignupForm'; // Assuming you have a SignupForm component
+import SignupForm from './SignupForm';
 
 const LoginForm = ({ onSwitchToSignup, onLogin }) => {
   const [username, setUsername] = useState('');
@@ -21,7 +21,6 @@ const LoginForm = ({ onSwitchToSignup, onLogin }) => {
       setError('All fields are required!');
       return;
     }
-    // Call the login function passed as a prop
     onLogin({ username, password });
   };
 
@@ -30,14 +29,12 @@ const LoginForm = ({ onSwitchToSignup, onLogin }) => {
   };
 
   return (
-    <div style={{marginLeft: '10px'}}>
-      {!showSignupForm && <h2>Login</h2>}
-      {showSignupForm ? (
-        <SignupForm />
-      ) : (
+    <div style={{ alignItems: 'left' }}>
+      {!showSignupForm && (
         <form onSubmit={handleLogin}>
+          <h2>Login</h2>
           {error && <div style={{ color: 'red' }}>{error}</div>}
-          <br/>
+          <br />
           <div>
             <label htmlFor="username">Username:</label>
             <input
@@ -59,10 +56,13 @@ const LoginForm = ({ onSwitchToSignup, onLogin }) => {
             />
           </div>
           <button type="submit">Login</button>
-          <br/>
-          <button type="button" onClick={handleSwitchToSignup}>Switch to Signup</button>
+          <br />
+          <button type="button" onClick={handleSwitchToSignup}>
+            Switch to Signup
+          </button>
         </form>
       )}
+      {showSignupForm && <SignupForm />}
     </div>
   );
 };
