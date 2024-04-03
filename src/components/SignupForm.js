@@ -18,7 +18,7 @@ const SignupForm = ({ onSwitchToLogin, onSignup }) => {
   const handleSignup = (e) => {
     e.preventDefault();
     if (username.trim() === '' || password.trim() === '' || confirmPassword.trim() === '' || email.trim() === '') {
-      setError('Please fill in all fields.');
+      setError('All fields are required!');
       return;
     }
     if (password !== confirmPassword) {
@@ -37,33 +37,52 @@ const SignupForm = ({ onSwitchToLogin, onSignup }) => {
   };
 
   return (
-    <form onSubmit={handleSignup}>
-      {error && <div>{error}</div>}
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+    <form onSubmit={handleSignup} style={{ marginLeft: '2px' }}>
+      <h2>Signup</h2>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      <br/>
+      <div>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          placeholder="Enter your username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          placeholder="Enter your password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="confirmPassword">Confirm Password:</label>
+        <input
+          type="password"
+          placeholder="Confirm your password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+
       <button type="submit">Signup</button>
+      <br />
       <button type="button" onClick={onSwitchToLogin}>Switch to Login</button>
     </form>
   );
