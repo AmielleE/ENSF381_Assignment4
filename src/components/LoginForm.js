@@ -1,6 +1,6 @@
 /*
 =================================================================================================================
-Name: LoginFrom.js
+Name: LoginForm.js
 Assignment: 5
 Author(s): Amielle El Makhzoumi, Diba Jamali
 Submission: April 8th, 2024
@@ -15,12 +15,32 @@ const LoginForm = ({ onSwitchToSignup, onLogin }) => {
   const [error, setError] = useState('');
   const [showSignupForm, setShowSignupForm] = useState(false);
 
+  const validateUsername = (username) => {
+    if (username.trim() === '') {
+      setError('Username cannot be empty.');
+      return false;
+    }
+    return true;
+  };
+
+  const validatePassword = (password) => {
+    if (password.trim() === '') {
+      setError('Password cannot be empty.');
+      return false;
+    }
+    return true;
+  };
+
   const handleLogin = (e) => {
     e.preventDefault();
-    if (username.trim() === '' || password.trim() === '') {
-      setError('All fields are required!');
-      return;
-    }
+
+    // Validate username
+    if (!validateUsername(username)) return;
+
+    // Validate password
+    if (!validatePassword(password)) return;
+
+    // Perform login
     onLogin({ username, password });
   };
 
