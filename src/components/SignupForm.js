@@ -1,103 +1,100 @@
 /*
 =================================================================================================================
-Name: SignupForm.js
+Name: SignupFrom.js
 Assignment: 5
 Author(s): Amielle El Makhzoumi, Diba Jamali
 Submission: April 8th, 2024
 =================================================================================================================
 */
-import React, { useState } from 'react';
-import LoginForm from './LoginForm';
+import React, {useState} from 'react';
 
-const SignupForm = ({ onSwitchToLogin, onSignup }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
-  const [showLoginForm, setShowLoginForm] = useState(false);
+const SignupForm = ({ switchToLogin }) => {
+  const [message, setMessage] = useState({ text: '', type: '' });
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    if (username.trim() === '' || password.trim() === '' || confirmPassword.trim() === '' || email.trim() === '') {
-      setError('All fields are required!');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const { username, password, confirmPassword, email } = event.target.elements;
+
+    if (!username.value || !password.value || !confirmPassword.value || !email.value) {
+      setMessage({ text: 'All fields are required.', type: 'error' });
       return;
     }
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-    
-    const existingUsernames = ['user1', 'user2']; 
-    if (existingUsernames.includes(username)) {
-      setError('Username is already taken.');
-      return;
-    }
-    // Assuming onSignup is a function to handle signup
-    onSignup({ username, password, email });
-    // After successful signup, switch to login form
-    setShowLoginForm(true);
-  };
 
-  const handleSwitchToLogin = () => {
-    setShowLoginForm(true);
+    if (password.value !== confirmPassword.value) {
+      setMessage({ text: 'Passwords do not match.', type: 'error' });
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: username.value,
+          password: password.value,
+          email: email.value,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to sign up.');
+      }
+
+      setMessage({ text: 'User signed up successfully!', type: 'success' });
+    } catch (error) {
+      console.error('Signup Error:', error);
+      setMessage({ text: error.message || 'Failed to sign up.', type: 'error' });
+    }
   };
 
   return (
-    <div style={{ marginLeft: '10px' }}>
-      {!showLoginForm && <h2>Signup</h2>}
-      {showLoginForm ? (
-        <LoginForm />
-      ) : (
-        <form onSubmit={handleSignup} style={{ alignItems: 'left' }}>
-          {error && <div style={{ color: 'red' }}>{error}</div>}
-          <br />
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              placeholder="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="confirmPassword">Confirm Password:</label>
-            <input
-              type="password"
-              placeholder="Confirm your password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-
-          <button type="submit">Signup</button>
-          <br />
-          <button type="button" onClick={handleSwitchToLogin}>Switch to Login</button>
-        </form>
+    <form onSubmit={handleSubmit}>
+      {message.text && (
+        <div style={{ color: message.type === 'error' ? 'red' : 'green', marginBottom: '10px' }}>
+          {message.text}
+        </div>
       )}
-    </div>
+      <div>
+        <label>
+          Username:
+          <input 
+          name="username" 
+          type="text" 
+          placeholder="Username" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Password:
+          <input 
+          name="password" 
+          type="password" 
+          placeholder="Password" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Confirm Password:
+          <input 
+          name="confirmPassword" 
+          type="password" 
+          placeholder="Confirm Password" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Email:
+          <input 
+          name="email" 
+          type="email" 
+          placeholder="Email" />
+        </label>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
   );
 };
 
