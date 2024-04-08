@@ -11,7 +11,6 @@ import Header from './Header';
 import ProductList from './ProductList';
 import Cart from './Cart';
 import Footer from './Footer'; 
-import productsData from '../data/products'; 
 
 const ProductPage = () => {
   const [cartItems, setCartItems] = useState(() => {

@@ -1,15 +1,6 @@
-/*
-=================================================================================================================
-Name: ProductList.js
-Assignment: 4
-Author(s): Amielle El Makhzoumi, Diba Jamali
-Submission: March 25th, 2024
-=================================================================================================================
-*/
 import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
-import axios from 'axios'; 
-
+import axios from 'axios';
 
 const ProductList = ({ onAddToCart }) => {
   const [products, setProducts] = useState([]);
@@ -32,7 +23,10 @@ const ProductList = ({ onAddToCart }) => {
       {products.map(product => (
         <ProductItem 
           key={product.id}
-          product={product}
+          product={{
+            ...product,
+            image: product.image.startsWith('http') ? product.image : `http://localhost:5000/static/${product.image}`
+          }}
           onAddToCart={onAddToCart}
         />
       ))}
