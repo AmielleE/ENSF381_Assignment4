@@ -6,14 +6,30 @@ Author(s): Amielle El Makhzoumi, Diba Jamali
 Submission: March 25th, 2024
 =================================================================================================================
 */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
-import productsData from '../data/products'; 
+import axios from 'axios'; 
+
 
 const ProductList = ({ onAddToCart }) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/products'); 
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div className="product-list" style={{ width: '30%', padding: '1rem' }}>
-      {productsData.map(product => (
+      {products.map(product => (
         <ProductItem 
           key={product.id}
           product={product}
