@@ -1,26 +1,16 @@
-/*
-=================================================================================================================
-Name: ProductPage.js
-Assignment: 4
-Author(s): Amielle El Makhzoumi, Diba Jamali
-Submission: March 25th, 2024
-=================================================================================================================
-*/
 import React, { useState, useEffect } from 'react';
-import Header from './Header'; 
+import Header from './Header';
 import ProductList from './ProductList';
 import Cart from './Cart';
-import Footer from './Footer'; 
+import Footer from './Footer';
 
 const ProductPage = () => {
   const [cartItems, setCartItems] = useState(() => {
-   
     const savedCartItems = localStorage.getItem('cartItems');
     return savedCartItems ? JSON.parse(savedCartItems) : [];
   });
 
   useEffect(() => {
-    
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
 
@@ -37,7 +27,7 @@ const ProductPage = () => {
 
   const handleUpdateCartQty = (productId, quantity) => {
     setCartItems(cartItems.map(item =>
-      item.id === productId ? { ...item, quantity } : item
+      item.id === productId ? { ...item, quantity: quantity } : item
     ));
   };
 
@@ -49,10 +39,10 @@ const ProductPage = () => {
     <div>
       <Header />
       <main>
-        <ProductList products={productsData} onAddToCart={handleAddToCart} />
-        <Cart 
-          cartItems={cartItems} 
-          onUpdateCartQty={handleUpdateCartQty} 
+        <ProductList onAddToCart={handleAddToCart} />
+        <Cart
+          cartItems={cartItems}
+          onUpdateCartQty={handleUpdateCartQty}
           onRemoveFromCart={handleRemoveFromCart}
         />
       </main>
