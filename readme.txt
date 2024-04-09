@@ -12,3 +12,7 @@ For the backend:
 - venv\Scripts\activate
 - pip install flask
 - pip install flask-cors
+
+
+*NOTE* Product page doesn't work. Shop Now button in the Homepage doesn't work either. But the login and signup 
+        pages work. As indicated in the instructions.
