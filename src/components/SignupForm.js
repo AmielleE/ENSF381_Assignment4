@@ -7,76 +7,95 @@ Submission: April 8th, 2024
 =================================================================================================================
 */
 import React, { useState } from 'react';
+import LoginForm from './LoginForm';
 
-const SignupForm = ({ switchToLogin }) => {
+function SignupForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [showLogin, setShowLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  function handleSignup(e) {
     e.preventDefault();
-    if (!username || !password || !confirmPassword || !email) {
-      setErrorMessage('All fields are required!');
-    } else if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match!');
+    if (username.trim() === '' ||
+      password.trim() === '' ||
+      confirmPassword.trim() === '' ||
+      email.trim() === ''){
+        setErrorMessage('All fields are required!');
+        
     } else {
-      setErrorMessage('User signed up successfully!');
+      if (password !== confirmPassword) {
+        setErrorMessage("Passwords do not match")
+      } else {
+        fetch('http://127.0.0.1:5000/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 'username': username, 'password': password, 'email': email }),
+        })
+        .then(response => {
+          if (response.ok) {
+            
+            return response.json();
+          } else {
+            throw new Error('Registration failed');
+          }
+        })
+        .then(data => setErrorMessage(data.message))
+        .catch(error => setErrorMessage("Error. Please try again later."));
+      }
     }
-  };
+    }
+
+    function gotoLoginForm() {
+      setShowLogin(true); 
+    }
+
+  if (showLogin) {
+    return <LoginForm />; 
+}
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Signup</h2>
-      {errorMessage && <div style={{color: 'red', marginBottom: '1rem' }}> {errorMessage}</div>}
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
+    <div>
+      <h1>Signup</h1>
+      <p style={{ color: 'red' }}>{errorMessage}</p>
+      <form onSubmit={handleSignup}>
+        <span>Username:<input
           type="text"
-          id="username"
-          placeholder="Enter your username"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
+        /></span>
+        <br />
+        <span>Password:<input
           type="password"
-          id="password"
-          placeholder="Enter your password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="confirmPassword">Confirm Password:</label>
-        <input
+        /></span>
+        <br />
+        <span>Confirm Password:<input
           type="password"
-          id="confirmPassword"
-          placeholder="Confirm your password"
+          placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
+        /></span>
+        <br />
+        <span>Email:<input
           type="email"
-          id="email"
-          placeholder="Enter your email"
+          placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div>
+        /></span>
+        <br />
         <button type="submit">Signup</button>
-      </div>
-      <div>
-        <button type="button" onClick={switchToLogin}>Switch to Login</button>
-      </div>
-    </form>
+        <br />
+        <button onClick={gotoLoginForm}>Switch to Login</button>
+      </form>
+    </div>
   );
 };
 

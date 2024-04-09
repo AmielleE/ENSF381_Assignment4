@@ -9,25 +9,21 @@ Submission: April 8th, 2024
 import React, { useState } from 'react';
 import Header from './Header';
 import LoginForm from './LoginForm';
+import SignupForm from './SignupForm';
 import Footer from './Footer';
-import SignupForm from './SignupForm'; 
 
-const LoginPage = () => {
-  const [showLoginForm, setShowLoginForm] = useState(true);
+const LoginPage = ({ setIsLoggedIn }) => {
+  const [showLogin, setShowLogin] = useState(true);
 
   const switchForm = () => {
-    setShowLoginForm(!showLoginForm);
-  };
-
-  const handleLogin = () => {
-    switchForm();
+    setShowLogin((prev) => !prev);
   };
 
   return (
     <div>
       <Header />
-      {showLoginForm ? (
-        <LoginForm switchToSignup={switchForm} onLogin={handleLogin} />
+      {showLogin ? (
+        <LoginForm switchToSignup={switchForm} setIsLoggedIn={setIsLoggedIn} />
       ) : (
         <SignupForm switchToLogin={switchForm} />
       )}

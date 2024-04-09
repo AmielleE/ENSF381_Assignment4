@@ -1,36 +1,37 @@
+/*
+=================================================================================================================
+Name: ProductList.js
+Assignment: 5
+Author(s): Amielle El Makhzoumi, Diba Jamali
+Submission: April 8th, 2024
+=================================================================================================================
+*/
 import React, { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
-import axios from 'axios';
 
-const ProductList = ({ onAddToCart }) => {
-  const [products, setProducts] = useState([]);
+function ProductList(props){
+  const [products, setProducts] = useState("");
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/products'); 
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching products:', error);
-      }
-    };
+      fetch('http://127.0.0.1:5000/products', {
+          method: 'GET',
+          headers: {'Content-Type': 'application/json'}
+          })
+          .then(response => {
+              if (response.ok) {
+                  return response.json();
+              } else {
+                  throw new Error('API call failed');
+              }
+          })
+          .then(data => setProducts(data))
+          .catch(error => console.log(error));
+      }, []);
 
-    fetchProducts();
-  }, []);
-
-  return (
-    <div className="product-list" style={{ width: '30%', padding: '1rem' }}>
-      {products.map(product => (
-        <ProductItem 
-          key={product.id}
-          product={{
-            ...product,
-            image: product.image.startsWith('http') ? product.image : `http://localhost:5000/static/${product.image}`
-          }}
-          onAddToCart={onAddToCart}
-        />
-      ))}
-    </div>
+  return(
+      <div className="product-list">
+          {(products) ? <ProductItem product={products} addToCart={props.addToCart} /> : ""}
+      </div>
   );
 };
 

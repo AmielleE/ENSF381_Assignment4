@@ -1,54 +1,72 @@
-import React, { useState, useEffect } from 'react';
+/*
+=================================================================================================================
+Name: ProductPage.js
+Assignment: 5
+Author(s): Amielle El Makhzoumi, Diba Jamali
+Submission: April 8th, 2024
+=================================================================================================================
+*/
+import React, {useState, useEffect} from 'react';
 import Header from './Header';
 import ProductList from './ProductList';
 import Cart from './Cart';
 import Footer from './Footer';
+import {useNavigate} from 'react-router-dom';
+import { useAuthContext } from '../App.js';
 
-const ProductPage = () => {
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCartItems = localStorage.getItem('cartItems');
-    return savedCartItems ? JSON.parse(savedCartItems) : [];
-  });
+function ProductPage() {
+  const [cart, setCart] = useState([]);
+  const {authenticated, setAuthenticated} = useAuthContext();
+  const navigate = useNavigate();
+
+  useEffect(()=> {
+    if (!authenticated){
+        navigate(`/login`);
+    }
+},[authenticated, navigate])
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  const handleAddToCart = (product) => {
-    const existingItem = cartItems.find(item => item.id === product.id);
-    if (existingItem) {
-      setCartItems(cartItems.map(item =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      ));
-    } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+    const storedCart = JSON.parse(localStorage.getItem('cart'));
+    if (storedCart && storedCart.length > 0) {
+      setCart(storedCart);
     }
-  };
+  }, []);
 
-  const handleUpdateCartQty = (productId, quantity) => {
-    setCartItems(cartItems.map(item =>
-      item.id === productId ? { ...item, quantity: quantity } : item
-    ));
-  };
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
 
-  const handleRemoveFromCart = (productId) => {
-    setCartItems(cartItems.filter(item => item.id !== productId));
-  };
+  function addToCart(product) {
+    const existingItem = cart.find(item => item.id === product.id);
+    if (existingItem) {
+      setCart(cart.map(item => item.id === product.id ? {...item, quantity: item.quantity + 1} : item));
+    } else {
+      setCart([...cart, {...product, quantity: 1}]);
+    }
+  }
+
+  function removeFromCart(item) {
+    const updatedCart = cart.map(cartItem => {
+      if (cartItem.id === item.id) {
+        return { ...cartItem, quantity: cartItem.quantity - 1 };
+      }
+      return cartItem;
+    }).filter(cartItem => cartItem.quantity > 0);
+    setCart(updatedCart);
+  }
 
   return (
-    <div>
+    <div className="product-page">
       <Header />
-      <main>
-        <ProductList onAddToCart={handleAddToCart} />
-        <Cart
-          cartItems={cartItems}
-          onUpdateCartQty={handleUpdateCartQty}
-          onRemoveFromCart={handleRemoveFromCart}
-        />
-      </main>
+      <table style={{width:"100%"}}>
+        <tr>
+          <td style={{verticalAlign:'top'}}><ProductList addToCart={addToCart} /></td>
+          <td style={{verticalAlign:'top'}}><Cart cart={cart} removeFromCart={removeFromCart} /></td>
+        </tr>
+      </table>
       <Footer />
     </div>
   );
-};
+}
 
 export default ProductPage;

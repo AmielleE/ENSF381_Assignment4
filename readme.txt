@@ -6,3 +6,9 @@ List of libraries used:
 - styled-components (npm install styled-components)
 - bootstrap (npm install bootstrap)
 - react (npm install react)
+
+For the backend:
+- python -m venv venv
+- venv\Scripts\activate
+- pip install flask
+- pip install flask-cors
